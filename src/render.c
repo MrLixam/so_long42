@@ -6,13 +6,13 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:11:35 by lvincent          #+#    #+#             */
-/*   Updated: 2023/03/21 17:22:21 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:39:58 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	render_choice(char c, t_background_img bgrd, int x, int y)
+static void	choice_bground(char c, t_background_img bgrd, int x, int y)
 {
 	if (c == '0' || c == 'P')
 		mlx_put_image_to_window(bgrd.mlx, bgrd.win, bgrd.empty, x * 32, y * 32);
@@ -24,23 +24,22 @@ static void	render_choice(char c, t_background_img bgrd, int x, int y)
 		mlx_put_image_to_window(bgrd.mlx, bgrd.win, bgrd.exit, x * 32, y * 32);
 }
 
-void	background_render(char *map, t_background_img background)
+void	background_render(t_background_img background)
 {
-	char	*line;
 	int		x;
 	int		y;
-	int		fd;
 
-	fd = open(map, 00);
-	line = get_next_line(fd);
 	y = 0;
-	while (line)
+	while (background.map[y])
 	{
 		x = -1;
-		while (line[++x])
-			render_choice(line[x], background, x, y);
+		while (background.map[y][++x])
+			choice_bground(background.map[y][x], background, x, y);
 		y++;
-		free(line);
-		line = get_next_line(fd);
 	}
+}
+
+void	player_overlay(t_player *player, t_background_img map)
+{
+
 }
