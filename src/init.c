@@ -6,25 +6,32 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:52 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/05 15:45:22 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/11 20:15:36 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-static void	map_to_list(t_background_img *back, char *map)
+
+static char **map_to_list(char *map)
 {
-	int	fd;
-	int	i;
+	int		fd;
+	char	*buffer;
+	char	*line;	
+	char	**mapL;
 
 	fd = open(map, 00);
-	i = 0;
-	while (1)
+	buffer = get_next_line(fd);
+	while (buffer)
 	{
-		back->map[i] = get_next_line(fd);
-		if (back->map[i] == NULL)
-			break ;
-		i++;
+		line = ft_strjoin(line, buffer);
+		free(buffer);
+		buffer = get_next_line(fd);
 	}
+	free(buffer);
+	close(fd);
+	mapL = ft_split(line, '\n');
+	free(line);
+	return (mapL);
 }
 
 void	init_background(t_background_img *back, void *mlx, void *win, char *map)
@@ -38,32 +45,32 @@ void	init_background(t_background_img *back, void *mlx, void *win, char *map)
 	back->exit = mlx_xpm_file_to_image(mlx, "../res/sombrero.xpm", &s, &s);
 	back->mlx = mlx;
 	back->win = win;
-	map_to_list(back, map);
+	back->map = map_to_list(map);
 }
+
 static void	init_player_pos(t_player *player, char **map)
 {
-	int i;
-	int j;
+	int y;
+	int x;
 
-	i = 0;	
-	while (map[i])
+	y = 0;
+	while (map[y])
 	{
-		j = 0;
-		while (map[i][j])
+		x = 0;
+		while (map[y][x])
 		{
-			if (map[i][j] == 'P')
+			if (map[y][x] == 'P')
 			{
-				player->x = j;
-				player->y = i;
-				return ;
+				player->x = x;
+				player->y = y;
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 
-void	init_player(t_player *player, void *mlx, char **map)
+void	init_player(t_player *player, void *mlx, char *map)
 {
 	int s;
 	s = 32;

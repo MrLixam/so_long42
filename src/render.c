@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:11:35 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/05 15:39:58 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:23:00 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,21 @@ static void	choice_bground(char c, t_background_img bgrd, int x, int y)
 
 void	background_render(t_background_img background)
 {
+	char	*line;
 	int		x;
 	int		y;
+	int		fd;
 
+	fd = open(background.map, 00);
+	line = get_next_line(fd);
 	y = 0;
-	while (background.map[y])
+	while (line)
 	{
 		x = -1;
-		while (background.map[y][++x])
-			choice_bground(background.map[y][x], background, x, y);
+		while (line[++x])
+			choice_bground(line[x], background, x, y);
 		y++;
+		free(line);
+		line = get_next_line(fd);
 	}
-}
-
-void	player_overlay(t_player *player, t_background_img map)
-{
-
 }

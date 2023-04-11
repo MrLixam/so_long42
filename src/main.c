@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:45:55 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/05 15:41:56 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:25:18 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 	win = mlx_new_window(mlx, 1920, 1080, "MAIN");
 	init_background(&background, mlx, win, argv[1]);
 	init_player(&player, mlx, background.map);
+	background_render(background);
 	mlx_loop(mlx);
 	return (0);
 }
