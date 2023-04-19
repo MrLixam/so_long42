@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:43:47 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/19 18:02:42 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/19 19:22:02 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 
 typedef struct	s_data
 {
-	void	*mlx;
-	void	*win;
+	void				*mlx;
+	void				*win;
+	t_background_img	*background;
+	t_player			*player;
 }	t_data;
 
 typedef struct	s_background_img
@@ -30,7 +32,6 @@ typedef struct	s_background_img
 	void	*exit;
 	int		collected;
 	char 	**map;
-	t_data	data;
 }	t_background_img;
 
 typedef struct	s_player
@@ -43,15 +44,11 @@ typedef struct	s_player
 	int		y;
 	char	ori;
 	int		moves;
-	t_data	data;
 }	t_player;
 
-
-int		parse(char *to_parse);
-void	init_background(t_background_img *back, t_data main, char *map);
-void	init_player(t_player *player, t_data main, char **map);
+void	init_background(t_data *data, char *map);
+void	init_player(t_data *data);
 void	render_frame(t_background_img background);
-void	player_overlay(t_player *player, t_background_img map);
-int		handle_no_event(void *data);
+void	player_overlay(t_data *data);
 int		handle_inputs(int key, t_data *data);
 #endif

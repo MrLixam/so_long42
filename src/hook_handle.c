@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:08:02 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/19 19:01:49 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/19 19:26:54 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	handle_inputs(int key, t_data *data)
 {
 	if (key == K_ESC)
-		end(data)
+		//end(data);
 	if (key == K_A || key == K_D)
 		move_player(key);
 	return (0);
