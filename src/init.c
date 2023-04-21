@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:52 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/19 19:26:36 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/21 18:33:17 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ void	init_background(t_data *data, char *map)
 	back->coll = mlx_xpm_file_to_image(data->mlx, "../res/tacos.xpm", &s, &s);
 	back->exit = mlx_xpm_file_to_image(data->mlx, "../res/sombrero.xpm", &s, &s);
 	back->map = map_to_list(map);
+	back->collected = 0;
 }
 
-static void	init_player_pos(t_player *player, char **map)
+static void	init_player_pos(t_player *p, char **map)
 {
-	int y;
-	int x;
-
+	int			y;
+	int			x;
+	
 	y = 0;
 	while (map[y])
 	{
@@ -62,8 +63,9 @@ static void	init_player_pos(t_player *player, char **map)
 		{
 			if (map[y][x] == 'P')
 			{
-				player->x = x;
-				player->y = y;
+				p->x = x;
+				p->y = y;
+				return ;
 			}
 			x++;
 		}
