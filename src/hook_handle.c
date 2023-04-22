@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:08:02 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/21 18:35:29 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/22 02:28:15 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static void	move_player(int x, int y, t_data *data)
 {
 	char	**map;
 	int 	pos[2];
+	t_background_img *b;
 
-	map = data->background->map;
+	b = data->background;
+	map = b->map;
 	pos[0] = data->player->x;
 	pos[1] = data->player->y;
 	if (map[pos[0] + x][pos[1] + y] != '1')
