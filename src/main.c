@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	b = init_background(&data, "../maps/small.ber");
 	p = init_player(data);
 	render_frame(&data);
-	mlx_hook(data.win, 2, 1L<<0, handle_inputs, &main);
+	mlx_hook(data.win, 2, 1L<<0, handle_inputs, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }
