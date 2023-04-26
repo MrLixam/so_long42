@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void choice_player(t_data *data)
+void player_choice(t_data *data)
 {
 	char ori;
 	void *mlx;
@@ -69,4 +69,9 @@ void	render_frame(t_data *data)
 	}
 }
 
-
+int	game_loop(t_data *data)
+{
+	render_frame(data);
+	player_choice(data);
+	return (0);
+}

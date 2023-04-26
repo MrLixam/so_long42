@@ -25,9 +25,8 @@ int main(int argc, char **argv)
 	data.player = &p;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "MAIN");
-	b = init_background(&data, "../maps/small.ber");
-	p = init_player(data);
-	render_frame(&data);
+	init(&data, argv[1]);
+	mlx_loop_hook(data.mlx, &game_loop, &data);
 	mlx_hook(data.win, 2, 1L<<0, handle_inputs, &data);
 	mlx_loop(data.mlx);
 	return (0);

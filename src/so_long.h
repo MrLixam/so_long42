@@ -23,6 +23,7 @@ typedef struct	s_background_img
 	void	*empty;
 	void	*exit;
 	int		collected;
+	int		coll_end;
 	char 	**map;
 }	t_background_img;
 
@@ -46,9 +47,10 @@ typedef struct	s_data
 	t_player			*player;
 }	t_data;
 
-t_background_img	init_background(t_data *data, char *map);
-t_player			init_player(t_data data);
+void			init(t_data *data, char *map);
 void				render_frame(t_data *data);
 void				player_overlay(t_data *data);
 int					handle_inputs(int key, t_data *data);
+void		player_choice(t_data *data);
+int		game_loop(t_data *data);
 #endif

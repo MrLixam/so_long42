@@ -12,6 +12,33 @@
 
 #include "so_long.h"
 
+static char     *ft_strrejoin(char *s1, char *s2)
+{
+        char    *rv;
+
+        if (!s1)
+        {
+                rv = malloc(ft_strlen(s2) + 1);
+                if (!rv)
+                        return (NULL);
+                rv[ft_strlen(s2)] = '\0';
+                ft_memcpy(rv, s2, ft_strlen(s2));
+                return (rv);
+        }
+        if (!s2)
+                return (s1);
+        rv = malloc(1 + ft_strlen(s1) + ft_strlen(s2));
+        if (!rv)
+                return (NULL);
+        ft_memcpy(rv, s1, ft_strlen(s1));
+        ft_memcpy(rv + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+        if (rv[ft_strlen(s1) + ft_strlen(s2)] != '\0')
+                rv[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+        free(s1);
+        return (rv);
+}
+
+
 static char **map_to_list(char *map)
 {
 	int		fd;
@@ -20,11 +47,11 @@ static char **map_to_list(char *map)
 	char	**mapL;
 
 	fd = open(map, 00);
-	line = "";
+	line = ft_strdup("");
 	buffer = get_next_line(fd);
 	while (buffer)
 	{
-		line = ft_strjoin(line, buffer);
+		line = ft_strrejoin(line, buffer);
 		free(buffer);
 		buffer = get_next_line(fd);
 	}
@@ -35,27 +62,13 @@ static char **map_to_list(char *map)
 	return (mapL);
 }
 
-t_background_img	init_background(t_data *data, char *map)
-{
-	int	s;
-	t_background_img back;
-
-	s = 32;
-	back.wall = mlx_xpm_file_to_image(data->mlx, "../res/rock.xpm", &s, &s);
-	back.empty = mlx_xpm_file_to_image(data->mlx, "../res/grass.xpm", &s, &s);
-	back.coll = mlx_xpm_file_to_image(data->mlx, "../res/tacos.xpm", &s, &s);
-	back.exit = mlx_xpm_file_to_image(data->mlx, "../res/sombrero.xpm", &s, &s);
-	back.map = map_to_list(map);
-	back.collected = 0;
-	return (back);
-}
-
-static t_player	init_player_pos(char **map)
+static void	init_pos(t_data *data, char **map)
 {
 	int			y;
 	int			x;
-	t_player	p;
+	t_player		*p;
 
+	p = data->player;
 	y = 0;
 	while (map[y])
 	{
@@ -64,29 +77,37 @@ static t_player	init_player_pos(char **map)
 		{
 			if (map[y][x] == 'P')
 			{
-				p.x = x;
-				p.y = y;
-				break ;
-			}
+				p->x = x;
+				p->y = y;
+			}	
+			else if (map[y][x] ==  'C' )
+				data->background->coll_end++;
 			x++;
 		}
 		y++;
 	}
-	return (p);
 }
 
-t_player	init_player(t_data data)
+void	init(t_data *data, char *map)
 {
 	int s;
-	t_player p;
+	t_player	*p;
+	t_background_img	*back;
 
 	s = 32;
-	p.north = mlx_xpm_file_to_image(data.mlx, "../res/capibaraU.xpm", &s, &s);
-	p.south = mlx_xpm_file_to_image(data.mlx, "../res/capibaraD.xpm", &s, &s);
-	p.west = mlx_xpm_file_to_image(data.mlx, "../res/capibara.xpm", &s, &s);
-	p.east = mlx_xpm_file_to_image(data.mlx, "../res/capibaraR.xpm", &s, &s);
-	p = init_player_pos(data.background->map);
-	p.ori = 'W';
-	p.moves = 0;
-	return (p);
+	p = data->player;
+	back = data->background;
+	back->wall = mlx_xpm_file_to_image(data->mlx, "../res/rock.xpm", &s, &s);
+	back->empty = mlx_xpm_file_to_image(data->mlx, "../res/grass.xpm", &s, &s);
+	back->coll = mlx_xpm_file_to_image(data->mlx, "../res/tacos.xpm", &s, &s);
+	back->exit = mlx_xpm_file_to_image(data->mlx, "../res/sombrero.xpm", &s, &s);
+	back->coll_end = 0;
+	back->map = map_to_list(map);
+	p->north = mlx_xpm_file_to_image(data->mlx, "../res/capibaraU.xpm", &s, &s);
+	p->south = mlx_xpm_file_to_image(data->mlx, "../res/capibaraD.xpm", &s, &s);
+	p->west = mlx_xpm_file_to_image(data->mlx, "../res/capibara.xpm", &s, &s);
+	p->east = mlx_xpm_file_to_image(data->mlx, "../res/capibaraR.xpm", &s, &s);
+	init_pos(data, data->background->map);
+	p->ori = 'W';
+	p->moves = 0;
 }
