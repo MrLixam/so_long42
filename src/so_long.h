@@ -6,7 +6,7 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:43:47 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/28 16:20:17 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/28 16:51:08 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct	s_player
 
 typedef struct	s_data
 {
-	int		size[2];
+	int		dim[2];
 	void				*mlx;
 	void				*win;
 	t_background_img	*background;

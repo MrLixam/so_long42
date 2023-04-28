@@ -6,7 +6,7 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:45:55 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/28 16:29:41 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/28 17:04:22 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int main(int argc, char **argv)
 	data.background = &b;
 	data.mlx = mlx_init();
 	init(&data, argv[1]);
-	data.win = mlx_new_window(data.mlx, 1920, 1080, "MAIN");
-	mlx_loop_hook(data.mlx, &game_loop, &data);
+	data.win = mlx_new_window(data.mlx, data.dim[1], data.dim[0], "YEAH BUDDY");
+	game_loop(&data);
 	mlx_hook(data.win, 2, 1L<<0, handle_inputs, &data);
 	mlx_loop(data.mlx);
 	return (0);

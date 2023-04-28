@@ -6,7 +6,7 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:08:02 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/27 17:22:52 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/28 17:02:25 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,23 @@ static void	handle_movement(int key, t_data *data)
 {
 	if (key == K_A)
 	{
-		move_player(-1, 0, data);
 		data->player->ori = 'W';
+		move_player(-1, 0, data);
 	}
 	else if (key == K_D)
 	{
-		move_player(1, 0, data);
 		data->player->ori = 'E';
+		move_player(1, 0, data);
 	}	
 	else if (key == K_S)
 	{
-		move_player(0, 1, data);
 		data->player->ori = 'S';
+		move_player(0, 1, data);
 	}
 	else
 	{
-		move_player(0, -1, data);
 		data->player->ori = 'N';
+		move_player(0, -1, data);
 	}
 }
 

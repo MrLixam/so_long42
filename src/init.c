@@ -6,7 +6,7 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:52 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/27 17:27:39 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/28 16:56:42 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ static void	init_pos(t_data *data, char **map)
 		}
 		y++;
 	}
+	data->dim[0] = y * 32 + 1;
+	data->dim[1] = x * 32 + 1;
 }
 
 void	init(t_data *data, char *map)
