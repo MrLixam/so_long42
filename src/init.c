@@ -6,7 +6,7 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:52 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/22 02:24:07 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/27 17:27:39 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char     *ft_strrejoin(char *s1, char *s2)
 }
 
 
-static char **map_to_list(char *map)
+char **map_to_list(char *map)
 {
 	int		fd;
 	char	*buffer;
@@ -102,6 +102,7 @@ void	init(t_data *data, char *map)
 	back->coll = mlx_xpm_file_to_image(data->mlx, "../res/tacos.xpm", &s, &s);
 	back->exit = mlx_xpm_file_to_image(data->mlx, "../res/sombrero.xpm", &s, &s);
 	back->coll_end = 0;
+	back->collected = 0;
 	back->map = map_to_list(map);
 	p->north = mlx_xpm_file_to_image(data->mlx, "../res/capibaraU.xpm", &s, &s);
 	p->south = mlx_xpm_file_to_image(data->mlx, "../res/capibaraD.xpm", &s, &s);

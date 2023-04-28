@@ -6,7 +6,7 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:45:55 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/22 02:23:07 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/28 16:29:41 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ int main(int argc, char **argv)
 {
 	t_data				data;
 	t_background_img	b;
-	t_player			p;
+	t_player		p;
 
-
-	/*if (parse(argv[1]) == -1)
-		return (-1);*/
-	data.background = &b;
+	if (argc != 2)
+		ft_error("Wrong command!\nCommand usage: ./so_long <map_path>");
+	parse(argv[1]);
 	data.player = &p;
+	data.background = &b;
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 1920, 1080, "MAIN");
 	init(&data, argv[1]);
+	data.win = mlx_new_window(data.mlx, 1920, 1080, "MAIN");
 	mlx_loop_hook(data.mlx, &game_loop, &data);
 	mlx_hook(data.win, 2, 1L<<0, handle_inputs, &data);
 	mlx_loop(data.mlx);

@@ -6,7 +6,7 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:43:47 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/22 02:23:13 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/28 16:20:17 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,25 @@ typedef struct	s_player
 
 typedef struct	s_data
 {
+	int		size[2];
 	void				*mlx;
 	void				*win;
 	t_background_img	*background;
 	t_player			*player;
 }	t_data;
 
-void			init(t_data *data, char *map);
-void				render_frame(t_data *data);
-void				player_overlay(t_data *data);
-int					handle_inputs(int key, t_data *data);
+void		init(t_data *data, char *map);
+void		render_frame(t_data *data);
+void		player_overlay(t_data *data);
+int		handle_inputs(int key, t_data *data);
 void		player_choice(t_data *data);
 int		game_loop(t_data *data);
+void		ft_error(char *err_mes);
+char		**map_to_list(char *map);
+void		end(t_data *data);
+void		parse(char *to_parse);
+void		free_map(char **map);
+int		ft_dfs_search(char **map, int x, int y, char to_find);
+void		parse3(char *to_parse);
+
 #endif
