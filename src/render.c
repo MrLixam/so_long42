@@ -6,11 +6,21 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:11:35 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/21 18:35:12 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/04/29 01:46:12 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static int	ft_lst_len(char **lst)
+{
+	int	i;
+
+	i = -1;
+	while (lst[++i])
+		;
+	return (i);
+}
 
 void player_choice(t_data *data)
 {
@@ -24,24 +34,35 @@ void player_choice(t_data *data)
 	win = data->win;
 	ori = p->ori;
 	if (ori == 'W')
-		mlx_put_image_to_window(mlx, win, p->west, p->x * 32, p->y * 32);
+		mlx_put_image_to_window(mlx, win, p->west, 320, 320);
 	else if (ori == 'E')
-		mlx_put_image_to_window(mlx, win, p->east, p->x * 32, p->y * 32);
+		mlx_put_image_to_window(mlx, win, p->east, 320, 320);
 	else if (ori == 'S')
-		mlx_put_image_to_window(mlx, win, p->south, p->x * 32, p->y * 32);
+		mlx_put_image_to_window(mlx, win, p->south, 320, 320);
 	else
-		mlx_put_image_to_window(mlx, win, p->north, p->x * 32, p->y * 32);
+		mlx_put_image_to_window(mlx, win, p->north, 320, 320);
 }
 
-static void	choice_bground(char c, t_data *data, int x, int y)
+static void	choice_bground(t_data *data, int x, int y)
 {
 	void	*mlx;
 	void	*win;
 	t_background_img *b;
-	
+	int 	crd[2];
+	char	c;
+
 	b = data->background;
 	mlx = data->mlx;
 	win = data->win;
+	crd[0] = data->player->y - 10 + y;
+	crd[1] = data->player->x - 10 + x;
+	if (crd[0] < 0 || crd[1] < 0)
+		return ;
+	if (crd[0] >= ft_lst_len(b->map))
+		return ;
+	if (crd[1] >= ft_strlen(b->map[crd[0]]))
+		return ;
+	c = b->map[crd[0]][crd[1]];
 	if (c == '0' || c == 'P')
 		mlx_put_image_to_window(mlx, win, b->empty, x * 32, y * 32);
 	else if (c == '1')
@@ -59,13 +80,12 @@ void	render_frame(t_data *data)
 	t_background_img *b;
 
 	b = data->background;
-	y = 0;
-	while (b->map[y])
+	y = -1;
+	while (++y <= 20)
 	{
 		x = -1;
-		while (b->map[y][++x])
-			choice_bground(b->map[y][x], data, x, y);
-		y++;
+		while (++x <= 20)
+			choice_bground(data, x, y);
 	}
 }
 
