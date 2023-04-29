@@ -6,7 +6,7 @@
 /*   By: liamv <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 21:18:55 by liamv             #+#    #+#             */
-/*   Updated: 2023/04/27 00:34:28 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/29 01:52:10 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void free_map(char **map)
 void     end(t_data *data)
 {
 	void *mlx;
-	t_background_img *b;
-	t_player *p;
 
 	if (data->mlx)
 	{

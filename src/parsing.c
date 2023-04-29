@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:49:54 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/28 16:18:56 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/29 01:55:22 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	map_elements(char **map)
 	
 static int	not_rectangle(char **map)
 {
-	int len;
+	size_t len;
 	int i;
 
 	len = ft_strlen(map[0]);

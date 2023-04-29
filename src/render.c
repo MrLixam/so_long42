@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:11:35 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/29 01:46:12 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/29 01:53:48 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	choice_bground(t_data *data, int x, int y)
 		return ;
 	if (crd[0] >= ft_lst_len(b->map))
 		return ;
-	if (crd[1] >= ft_strlen(b->map[crd[0]]))
+	if ((size_t)crd[1] >= ft_strlen(b->map[crd[0]]))
 		return ;
 	c = b->map[crd[0]][crd[1]];
 	if (c == '0' || c == 'P')
@@ -77,9 +77,7 @@ void	render_frame(t_data *data)
 {
 	int		x;
 	int		y;
-	t_background_img *b;
 
-	b = data->background;
 	y = -1;
 	while (++y <= 20)
 	{
