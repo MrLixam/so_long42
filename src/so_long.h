@@ -6,15 +6,15 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:43:47 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/29 00:41:54 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/29 17:01:40 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include <fcntl.h>
-# include "libft/libft.h"
-# include "../mlx_linux/minilibx-linux/mlx.h"
+# include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
 
 typedef struct	s_background_img
 {

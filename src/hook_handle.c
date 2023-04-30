@@ -6,7 +6,7 @@
 /*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:08:02 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/29 01:46:56 by liamv            ###   ########.fr       */
+/*   Updated: 2023/04/29 19:04:45 by liamv            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ static void	move_player(int x, int y, t_data *data)
 			b->collected++;
 		}
 		if (map[p->y][p->x] == 'E' && b->collected == b->coll_end)
+		{
 			end(data);
+			exit(EXIT_SUCCESS);
+		}
 		mlx_clear_window(data->mlx, data->win);
 		game_loop(data);
 	}
@@ -66,7 +69,10 @@ static void	handle_movement(int key, t_data *data)
 int	handle_inputs(int key, t_data *data)
 {
 	if (key == K_ESC)
+	{
 		end(data);
+		exit(EXIT_SUCCESS);
+	}
 	if ((key == K_A || key == K_D) || (key == K_W || key == K_S))
 		handle_movement(key, data);
 	return (0);
