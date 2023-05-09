@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:49:54 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/29 01:55:22 by liamv            ###   ########.fr       */
+/*   Updated: 2023/05/09 16:14:33 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static int	map_elements(char **map)
 {	
-	int all[3];
-	int x;
-	int y;
+	int	all[3];
+	int	x;
+	int	y;
 
-	ft_bzero(all, 3*sizeof(int));
+	ft_bzero(all, 3 * sizeof(int));
 	y = -1;
 	while (map[++y])
 	{
 		x = -1;
-		while(map[y][++x])
+		while (map[y][++x])
 		{
 			if (map[y][x] == 'C')
 				all[0] = 1;
@@ -37,11 +37,11 @@ static int	map_elements(char **map)
 		return (1);
 	return (0);
 }
-	
+
 static int	not_rectangle(char **map)
 {
-	size_t len;
-	int i;
+	size_t	len;
+	int		i;
 
 	len = ft_strlen(map[0]);
 	i = 0;
@@ -51,11 +51,11 @@ static int	not_rectangle(char **map)
 	return (0);
 }
 
-static int map_walls(char **map)
+static int	map_walls(char **map)
 {
 	int	xy[2];
 	int	last;
-	
+
 	xy[0] = -1;
 	last = ft_strlen(map[0]) - 1;
 	while (map[0][++xy[0]])
@@ -75,42 +75,42 @@ static int map_walls(char **map)
 
 static void	parse2(char *to_parse)
 {
-	char **map;
+	char	**map;
 
 	map = map_to_list(to_parse);
 	if (map[0] == NULL)
-        {
-                free_map(map);
-                ft_error("File is empty!");
-        }
-        if (not_rectangle(map))
-        {
-                free_map(map);
-                ft_error("Map is not rectangular!");
-        }
-        if (map_elements(map))
-        {
-                free_map(map);
-                ft_error("Map must contain 1 player spawn, 1 exit and at least 1 collectible!");
-        }
-        if (ft_strlen(map[0]) < 3 || map_walls(map))
-        {
-                free_map(map);
-                ft_error("The map borders must be walls!");
-        }
-        free_map(map);
+	{
+		free_map(map);
+		ft_error("File is empty!");
+	}
+	if (not_rectangle(map))
+	{
+		free_map(map);
+		ft_error("Map is not rectangular!");
+	}
+	if (map_elements(map))
+	{
+		free_map(map);
+		ft_error("Some elements are missing from the map!");
+	}
+	if (ft_strlen(map[0]) < 3 || map_walls(map))
+	{
+		free_map(map);
+		ft_error("The map borders must be walls!");
+	}
+	free_map(map);
 	parse3(to_parse);
 }
 
 void	parse(char *to_parse)
 {
-	int fd;
+	int	fd;
 
 	fd = open(to_parse, 00);
 	if (fd == -1)
 	{
 		close(fd);
-		ft_error("The file is un-openable or doesn't exist!");	
+		ft_error("The file is un-openable or doesn't exist!");
 	}
 	close(fd);
 	if (ft_strncmp(ft_strrchr(to_parse, '.'), ".ber", 4))

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pathfind.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liamv <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 13:37:55 by liamv             #+#    #+#             */
-/*   Updated: 2023/04/28 16:18:02 by liamv            ###   ########.fr       */
+/*   Updated: 2023/05/09 16:26:19 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_dfs_search(char **map, int x, int y, char to_find)
 {
-	int temp;
+	int	temp;
 
 	if (map[y][x] == '1')
 		return (0);

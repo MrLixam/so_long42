@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liamv <liamv@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:08:02 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/29 19:04:45 by liamv            ###   ########.fr       */
+/*   Updated: 2023/05/09 16:26:01 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static void	move_player(int x, int y, t_data *data)
 {
-	char	**map;
-	t_background_img *b;
-	t_player	*p;
+	char				**map;
+	t_background_img	*b;
+	t_player			*p;
 
 	b = data->background;
 	map = b->map;
@@ -27,17 +27,12 @@ static void	move_player(int x, int y, t_data *data)
 		p->x += x;
 		p->y += y;
 		data->player->moves += 1;
+		ft_printf("player moves: %d\n", p->moves);
 		if (map[p->y][p->x] == 'C')
 		{
 			map[p->y][p->x] = '0';
 			b->collected++;
 		}
-		if (map[p->y][p->x] == 'E' && b->collected == b->coll_end)
-		{
-			end(data);
-			exit(EXIT_SUCCESS);
-		}
-		mlx_clear_window(data->mlx, data->win);
 		game_loop(data);
 	}
 }
@@ -45,25 +40,13 @@ static void	move_player(int x, int y, t_data *data)
 static void	handle_movement(int key, t_data *data)
 {
 	if (key == K_A)
-	{
-		data->player->ori = 'W';
 		move_player(-1, 0, data);
-	}
 	else if (key == K_D)
-	{
-		data->player->ori = 'E';
 		move_player(1, 0, data);
-	}	
 	else if (key == K_S)
-	{
-		data->player->ori = 'S';
 		move_player(0, 1, data);
-	}
 	else
-	{
-		data->player->ori = 'N';
 		move_player(0, -1, data);
-	}
 }
 
 int	handle_inputs(int key, t_data *data)

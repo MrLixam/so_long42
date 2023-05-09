@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:11:35 by lvincent          #+#    #+#             */
-/*   Updated: 2023/04/29 01:53:48 by liamv            ###   ########.fr       */
+/*   Updated: 2023/05/09 16:32:55 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,15 @@ static int	ft_lst_len(char **lst)
 	return (i);
 }
 
-void player_choice(t_data *data)
-{
-	char ori;
-	void *mlx;
-	void *win;
-	t_player *p;
-
-	p = data->player;
-	mlx = data->mlx;
-	win = data->win;
-	ori = p->ori;
-	if (ori == 'W')
-		mlx_put_image_to_window(mlx, win, p->west, 320, 320);
-	else if (ori == 'E')
-		mlx_put_image_to_window(mlx, win, p->east, 320, 320);
-	else if (ori == 'S')
-		mlx_put_image_to_window(mlx, win, p->south, 320, 320);
-	else
-		mlx_put_image_to_window(mlx, win, p->north, 320, 320);
-}
-
 static void	choice_bground(t_data *data, int x, int y)
 {
-	void	*mlx;
-	void	*win;
-	t_background_img *b;
-	int 	crd[2];
-	char	c;
+	t_background_img	*b;
+	int					crd[2];
+	char				c;
+	void				*mlx;
 
 	b = data->background;
 	mlx = data->mlx;
-	win = data->win;
 	crd[0] = data->player->y - 10 + y;
 	crd[1] = data->player->x - 10 + x;
 	if (crd[0] < 0 || crd[1] < 0)
@@ -64,16 +41,16 @@ static void	choice_bground(t_data *data, int x, int y)
 		return ;
 	c = b->map[crd[0]][crd[1]];
 	if (c == '0' || c == 'P')
-		mlx_put_image_to_window(mlx, win, b->empty, x * 32, y * 32);
+		mlx_put_image_to_window(mlx, data->win, b->empty, x * 32, y * 32);
 	else if (c == '1')
-		mlx_put_image_to_window(mlx, win, b->wall, x * 32, y * 32);
+		mlx_put_image_to_window(mlx, data->win, b->wall, x * 32, y * 32);
 	else if (c == 'C')
-		mlx_put_image_to_window(mlx, win, b->coll, x * 32, y * 32);
+		mlx_put_image_to_window(mlx, data->win, b->coll, x * 32, y * 32);
 	else if (c == 'E')
-		mlx_put_image_to_window(mlx, win, b->exit, x * 32, y * 32);		
+		mlx_put_image_to_window(mlx, data->win, b->exit, x * 32, y * 32);
 }
 
-void	render_frame(t_data *data)
+static void	render_frame(t_data *data)
 {
 	int		x;
 	int		y;
@@ -89,7 +66,11 @@ void	render_frame(t_data *data)
 
 int	game_loop(t_data *data)
 {
+	t_player	*p;
+
+	p = data->player;
+	mlx_clear_window(data->mlx, data->win);
 	render_frame(data);
-	player_choice(data);
+	mlx_put_image_to_window(data->mlx, data->win, p->sprite, 320, 320);
 	return (0);
 }
