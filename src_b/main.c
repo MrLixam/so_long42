@@ -1,0 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/08 00:45:55 by lvincent          #+#    #+#             */
+/*   Updated: 2023/05/09 16:45:40 by lvincent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+
+int	main(int argc, char **argv)
+{
+	t_data				data;
+	t_background_img	b;
+	t_player			p;
+
+	if (argc != 2)
+		ft_error("Wrong command!\nCommand usage: ./so_long <map_path>");
+	parse(argv[1]);
+	data.player = &p;
+	data.background = &b;
+	data.mlx = mlx_init();
+	init(&data, argv[1]);
+	data.win = mlx_new_window(data.mlx, 673, 673, "YEAH BUDDY");
+	game_loop(&data);
+	mlx_expose_hook(data.win, &game_loop, &data);
+	mlx_hook(data.win, 2, 1L << 0, handle_inputs, &data);
+	mlx_loop(data.mlx);
+	return (0);
+}
