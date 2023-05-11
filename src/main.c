@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:45:55 by lvincent          #+#    #+#             */
-/*   Updated: 2023/05/09 16:38:48 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:10:25 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ static int	check_end(t_data *data)
 	return (0);
 }
 
+static int end_cross(t_data *data)
+{
+	end(data);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data				data;
@@ -48,6 +55,7 @@ int	main(int argc, char **argv)
 	mlx_expose_hook(data.win, &game_loop, &data);
 	mlx_hook(data.win, 2, 1L << 0, handle_inputs, &data);
 	mlx_loop_hook(data.mlx, &check_end, &data);
+	mlx_hook(data.win, 17, 0, &end_cross, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }
