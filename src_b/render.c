@@ -6,13 +6,13 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:11:35 by lvincent          #+#    #+#             */
-/*   Updated: 2023/05/09 16:53:19 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:02:37 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	ft_lst_len(char **lst)
+static int	ft_lslen(char **lst)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ static int	ft_lst_len(char **lst)
 	return (i);
 }
 
-void	player_choice(t_data *data)
+static void	player_choice(t_data *data)
 {
 	char		ori;
 	void		*mlx;
@@ -47,20 +47,18 @@ static void	choice_bground(t_data *data, int x, int y)
 {
 	void				*mlx;
 	t_background_img	*b;
-	int					crd[2];
+	int					co[2];
 	char				c;
 
 	b = data->background;
 	mlx = data->mlx;
-	crd[0] = data->player->y - 10 + y;
-	crd[1] = data->player->x - 10 + x;
-	if (crd[0] < 0 || crd[1] < 0)
+	co[0] = data->player->y - 10 + y;
+	co[1] = data->player->x - 10 + x;
+	if (co[0] < 0 || co[1] < 0)
 		return ;
-	if (crd[0] >= ft_lst_len(b->map))
+	if (co[0] >= ft_lslen(b->map) || (size_t)co[1] >= ft_strlen(b->map[co[0]]))
 		return ;
-	if ((size_t)crd[1] >= ft_strlen(b->map[crd[0]]))
-		return ;
-	c = b->map[crd[0]][crd[1]];
+	c = b->map[co[0]][co[1]];
 	if (c == '0' || c == 'P')
 		mlx_put_image_to_window(mlx, data->win, b->empty, x * 32, y * 32);
 	else if (c == '1')
@@ -69,6 +67,8 @@ static void	choice_bground(t_data *data, int x, int y)
 		mlx_put_image_to_window(mlx, data->win, b->coll, x * 32, y * 32);
 	else if (c == 'E')
 		mlx_put_image_to_window(mlx, data->win, b->exit, x * 32, y * 32);
+	else if (c == 'X')
+		mlx_put_image_to_window(mlx, data->win, b->patr, x * 32, y * 32);
 }
 
 static void	render_frame(t_data *data)
@@ -87,7 +87,15 @@ static void	render_frame(t_data *data)
 
 int	game_loop(t_data *data)
 {
+	t_player	*p;
+	char		*tmp;
+
+	p = data->player;
 	render_frame(data);
 	player_choice(data);
+	mlx_string_put(data->mlx, data->win, 30, 690, 255255255, "Player Moves");
+	tmp = ft_itoa(p->moves);
+	mlx_string_put(data->mlx, data->win, 110, 690, 255255255, tmp);
+	free(tmp);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 17:08:02 by lvincent          #+#    #+#             */
-/*   Updated: 2023/05/09 16:46:10 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:47:49 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ static void	move_player(int x, int y, t_data *data)
 		{
 			map[p->y][p->x] = '0';
 			b->collected++;
-		}
-		if (map[p->y][p->x] == 'E' && b->collected == b->coll_end)
-		{
-			end(data);
-			exit(EXIT_SUCCESS);
 		}
 		mlx_clear_window(data->mlx, data->win);
 		game_loop(data);

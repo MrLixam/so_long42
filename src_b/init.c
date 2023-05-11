@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:52 by lvincent          #+#    #+#             */
-/*   Updated: 2023/05/09 16:44:17 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:56:45 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	check_img(t_data *data)
 
 	p = data->player;
 	b = data->background;
-	if ((!b->wall || !b->empty) || (!b->coll || !b->exit))
+	if ((!b->wall || !b->empty) || (!b->coll || !b->exit) || (!b->patr))
 	{
 		end(data);
 		ft_error("There was a problem getting map textures");
@@ -119,6 +119,7 @@ void	init(t_data *data, char *map)
 	back->empty = mlx_xpm_file_to_image(data->mlx, "./res/grass.xpm", &s, &s);
 	back->coll = mlx_xpm_file_to_image(data->mlx, "./res/tacos.xpm", &s, &s);
 	back->exit = mlx_xpm_file_to_image(data->mlx, "./res/sombrero.xpm", &s, &s);
+	back->patr = mlx_xpm_file_to_image(data->mlx, "./res/capibara.xpm", &s, &s);
 	back->coll_end = 0;
 	back->collected = 0;
 	back->map = map_to_list(map);

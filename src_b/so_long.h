@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:43:47 by lvincent          #+#    #+#             */
-/*   Updated: 2023/05/09 16:49:18 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:15:34 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_background_img
 	void	*coll;
 	void	*empty;
 	void	*exit;
+	void	*patr;
 	int		collected;
 	int		coll_end;
 	char	**map;
@@ -49,7 +50,6 @@ typedef struct s_data
 
 void		init(t_data *data, char *map);
 int			handle_inputs(int key, t_data *data);
-void		player_choice(t_data *data);
 int			game_loop(t_data *data);
 void		ft_error(char *err_mes);
 char		**map_to_list(char *map);

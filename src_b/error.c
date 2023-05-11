@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 21:18:55 by liamv             #+#    #+#             */
-/*   Updated: 2023/05/09 16:48:05 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:03:24 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	end_background(t_background_img *b, void *mlx)
 		mlx_destroy_image(mlx, b->coll);
 	if (b->exit)
 		mlx_destroy_image(mlx, b->exit);
+	if (b->patr)
+		mlx_destroy_image(mlx, b->patr);
 }
 
 void	free_map(char **map)
