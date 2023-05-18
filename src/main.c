@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:45:55 by lvincent          #+#    #+#             */
-/*   Updated: 2023/05/10 17:10:25 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/05/18 17:29:56 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_end(t_data *data)
 	return (0);
 }
 
-static int end_cross(t_data *data)
+static int	end_cross(t_data *data)
 {
 	end(data);
 	exit(EXIT_SUCCESS);

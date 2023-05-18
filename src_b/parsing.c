@@ -6,7 +6,7 @@
 /*   By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:49:54 by lvincent          #+#    #+#             */
-/*   Updated: 2023/05/09 16:45:12 by lvincent         ###   ########.fr       */
+/*   Updated: 2023/05/18 18:11:23 by lvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static int	map_elements(char **map)
 				all[1]++;
 			else if (map[y][x] == 'E')
 				all[2]++;
+			else if ((map[y][x] != '1' && map[y][x] != '0')
+			&& map[y][x] != 'X')
+				return (1);
 		}
 	}
 	if ((all[0] + all[1] + all[2]) != 3)
@@ -91,7 +94,7 @@ static void	parse2(char *to_parse)
 	if (map_elements(map))
 	{
 		free_map(map);
-		ft_error("Some elements are missing from the map!");
+		ft_error("Some elements on the map are missing or are incorrect!");
 	}
 	if (ft_strlen(map[0]) < 3 || map_walls(map))
 	{
